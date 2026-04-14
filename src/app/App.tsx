@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import emailjs from '@emailjs/browser';
+import emailjs from '@emailjs/browser';
 
 export default function App() {
   const containerRef = useRef<HTMLDivElement | null>(null)
@@ -12,6 +13,35 @@ export default function App() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeSection, setActiveSection] = useState('hero');
   const [expandedProject, setExpandedProject] = useState<number | null>(null);
+
+const form = useRef<HTMLFormElement>(null)
+const [isOpen, setIsOpen] = useState(false);
+const [formData, setFormData] = useState({
+  from_email: '',
+  subject: 'Collaboriamo?',
+  message: 'Ciao Noemi!\n\nHo visto il tuo portfolio, ti piacerebbe collaborare al mio progetto...?\n\n'
+});
+const [sending, setSending] = useState(false);
+const [sent, setSent] = useState(false); 
+
+const sendEmail = async () => {
+  setSending(true);
+  try {
+   await emailjs.send(
+  'service_8dqweyj',
+  'template_afyqsb5',
+  formData,
+  'GLL375a4mIU3YDBa4'
+);
+    setSent(true);
+    setTimeout(() => { setSent(false); setIsOpen(false); }, 2000);
+  } catch (e) {
+    alert('Errore durante l\'invio. Riprova.');
+  } finally {
+    setSending(false);
+  }
+};
+
 
 const form = useRef<HTMLFormElement>(null)
 const [isOpen, setIsOpen] = useState(false);
