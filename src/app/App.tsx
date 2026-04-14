@@ -139,7 +139,7 @@ const sendEmail = async () => {
           <p className="text-xs uppercase tracking-[0.3em] text-white/40">{project.year} — {project.subtitle}</p>
         </div>
 
-       <div className={`grid gap-16 ${project.id === 4 ? 'lg:grid-cols-2' : 'lg:grid-cols-[1fr_1.4fr]'}`}>
+        <div className={`grid gap-16 ${project.id === 4 ? 'lg:grid-cols-2' : 'lg:grid-cols-[1fr_1.4fr]'}`}>
           <div className="flex flex-col gap-10">
             <div>
               <h2 className={`text-6xl font-black leading-none mb-2 bg-gradient-to-r ${categoryColor} bg-clip-text text-transparent`}>{project.title}</h2>
@@ -180,8 +180,7 @@ const sendEmail = async () => {
                 ))}
               </div>
             </div>
-
-            <div>
+<div>
               <div className="flex items-center gap-4 mb-6">
                 <div className={`h-px w-8 bg-gradient-to-r ${categoryColor}`} />
                 <p className="text-xs uppercase tracking-[0.3em] text-white/40">Strumenti</p>
@@ -195,10 +194,9 @@ const sendEmail = async () => {
 
             {project.id === 4 && (
               <div>
-                <div className="flex items-center gap-30 mb-6">
-            
+                <div className="flex items-center gap-4 mb-13">
                 </div>
-                <div className="grid grid-cols-2 gap-15">
+                <div className="grid grid-cols-2 gap-8">
                   <img src="/progetti/a torino si (s)cambia/indice.png" alt="Indice" className="w-full object-contain" />
                   <img src="/progetti/a torino si (s)cambia/boa2rd.png" alt="Boa2rd" className="w-full object-contain" />
                   <img src="/progetti/a torino si (s)cambia/digital storytelling.png" alt="Digital storytelling" className="w-full object-contain" />
@@ -268,13 +266,11 @@ const sendEmail = async () => {
       <img src="/progetti/a torino si (s)cambia/mockup aperto.png" alt="Mockup aperto" className="w-full h-full object-cover object-center scale-[1.4]" />
     </div>
 
-    {/* Social */}
-    <div className="w-full flex flex-col gap-6">
-      <img src="/progetti/a torino si (s)cambia/post.png" alt="Post" className="w-full object-contain" />
-      <img src="/progetti/a torino si (s)cambia/stories.png" alt="Stories" className="w-full object-contain" />
-      <img src="/progetti/a torino si (s)cambia/reel e facebook.png" alt="Reel e Facebook" className="w-full object-contain" />
-      <img src="/progetti/a torino si (s)cambia/tiktok.png" alt="TikTok" className="w-full object-contain" />
-    </div>
+    {/* Social — larghezza piena */}
+    <img src="/progetti/a torino si (s)cambia/post.png" alt="Post" className="w-full object-contain" />
+    <img src="/progetti/a torino si (s)cambia/stories.png" alt="Stories" className="w-full object-contain" />
+    <img src="/progetti/a torino si (s)cambia/reel e facebook.png" alt="Reel e Facebook" className="w-full object-contain" />
+    <img src="/progetti/a torino si (s)cambia/tiktok.png" alt="TikTok" className="w-full object-contain" />
   </>
 ) : (
   <>
