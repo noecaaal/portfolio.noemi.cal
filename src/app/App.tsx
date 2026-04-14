@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-
+import emailjs from '@emailjs/browser';
 
 export default function App() {
   const containerRef = useRef<HTMLDivElement | null>(null)
@@ -12,6 +12,35 @@ export default function App() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeSection, setActiveSection] = useState('hero');
   const [expandedProject, setExpandedProject] = useState<number | null>(null);
+
+const form = useRef<HTMLFormElement>(null)
+const [isOpen, setIsOpen] = useState(false);
+const [formData, setFormData] = useState({
+  from_email: '',
+  subject: 'Collaboriamo?',
+  message: 'Ciao Noemi!\n\nHo visto il tuo portfolio, ti piacerebbe collaborare al mio progetto...?\n\n'
+});
+const [sending, setSending] = useState(false);
+const [sent, setSent] = useState(false); 
+
+const sendEmail = async () => {
+  setSending(true);
+  try {
+   await emailjs.send(
+  'service_8dqweyj',
+  'template_afyqsb5',
+  formData,
+  'GLL375a4mIU3YDBa4'
+);
+    setSent(true);
+    setTimeout(() => { setSent(false); setIsOpen(false); }, 2000);
+  } catch (e) {
+    alert('Errore durante l\'invio. Riprova.');
+  } finally {
+    setSending(false);
+  }
+};
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -110,7 +139,7 @@ export default function App() {
           <p className="text-xs uppercase tracking-[0.3em] text-white/40">{project.year} — {project.subtitle}</p>
         </div>
 
-        <div className="grid lg:grid-cols-[1fr_1.4fr] gap-16">
+       <div className={`grid gap-16 ${project.id === 4 ? 'lg:grid-cols-2' : 'lg:grid-cols-[1fr_1.4fr]'}`}>
           <div className="flex flex-col gap-10">
             <div>
               <h2 className={`text-6xl font-black leading-none mb-2 bg-gradient-to-r ${categoryColor} bg-clip-text text-transparent`}>{project.title}</h2>
@@ -163,7 +192,26 @@ export default function App() {
                 ))}
               </div>
             </div>
-          </div>
+
+            {project.id === 4 && (
+              <div>
+                <div className="flex items-center gap-30 mb-6">
+            
+                </div>
+                <div className="grid grid-cols-2 gap-15">
+                  <img src="/progetti/a torino si (s)cambia/indice.png" alt="Indice" className="w-full object-contain" />
+                  <img src="/progetti/a torino si (s)cambia/boa2rd.png" alt="Boa2rd" className="w-full object-contain" />
+                  <img src="/progetti/a torino si (s)cambia/digital storytelling.png" alt="Digital storytelling" className="w-full object-contain" />
+                  <img src="/progetti/a torino si (s)cambia/pillar.png" alt="Pillar" className="w-full object-contain" />
+                  <img src="/progetti/a torino si (s)cambia/rubriche.png" alt="Rubriche" className="w-full object-contain" />
+                  <img src="/progetti/a torino si (s)cambia/monitoring.png" alt="Monitoring" className="w-full object-contain" />
+                  <img src="/progetti/a torino si (s)cambia/contingency plan.png" alt="Contingency plan" className="w-full object-contain" />
+                  <img src="/progetti/a torino si (s)cambia/practise.png" alt="Practise" className="w-full object-contain" />
+                </div>
+              </div>
+            )}
+
+          </div>{/* ← chiude flex flex-col gap-10 (colonna sinistra) */}
 
           {/* Colonna immagini */}
           <div className="flex flex-col gap-4">
@@ -195,31 +243,65 @@ export default function App() {
                   </div>
                 </div>
               </>
-            ) : (
-              <>
-                <div className={`w-full h-80 bg-gradient-to-br ${categoryColor} opacity-10 flex items-center justify-center border border-white/5`}>
-                  <span className="text-white/20 text-sm uppercase tracking-widest">Immagine principale</span>
-                </div>
-                <div className="grid grid-cols-3 gap-3">
-                  {[1,2,3].map(i => (
-                    <div key={i} className={`h-44 bg-gradient-to-br ${categoryColor} opacity-10 flex items-center justify-center border border-white/5`}>
-                      <span className="text-white/20 text-xs uppercase tracking-widest">0{i}</span>
-                    </div>
-                  ))}
-                </div>
-                <div className="grid grid-cols-3 gap-3">
-                  {[4,5,6].map(i => (
-                    <div key={i} className={`h-44 bg-gradient-to-br ${categoryColor} opacity-10 flex items-center justify-center border border-white/5`}>
-                      <span className="text-white/20 text-xs uppercase tracking-widest">0{i}</span>
-                    </div>
-                  ))}
-                </div>
-              </>
-            )}
+            ) : project.id === 3 ? (
+  <>
+    <div className="grid grid-cols-2 gap-3">
+      <img src="/progetti/netway/logo e logotipo.png" alt="Logo e logotipo" className="w-full h-48 object-contain" />
+      <img src="/progetti/netway/tipografia.png" alt="Tipografia" className="w-full h-48 object-contain" />
+      <img src="/progetti/netway/palette.png" alt="Palette" className="w-full h-48 object-contain" />
+      <img src="/progetti/netway/area di rispetto.png" alt="Area di rispetto" className="w-full h-48 object-contain" />
+    </div>
+    <img src="/progetti/netway/verticalizzazione.png" alt="Verticalizzazione" className="w-full object-contain" />
+    <img src="/progetti/netway/2.png" alt="Social media" className="w-full object-contain" />
+    <img src="/progetti/netway/3.png" alt="Web e brochure" className="w-full object-contain" />
+    <img src="/progetti/netway/4.png" alt="Merchandising" className="w-full object-contain" />
+  </>
+) : project.id === 4 ? (
+  <>
+    {/* Mockup chiuso */}
+    <div className="w-full h-[380px] overflow-hidden rounded">
+      <img src="/progetti/a torino si (s)cambia/mockup chiuso.png" alt="Mockup chiuso" className="w-full h-full object-cover object-center scale-[1.4]" />
+    </div>
+
+    {/* Mockup aperto */}
+    <div className="w-full h-[380px] overflow-hidden rounded">
+      <img src="/progetti/a torino si (s)cambia/mockup aperto.png" alt="Mockup aperto" className="w-full h-full object-cover object-center scale-[1.4]" />
+    </div>
+
+    {/* Social */}
+    <div className="w-full flex flex-col gap-6">
+      <img src="/progetti/a torino si (s)cambia/post.png" alt="Post" className="w-full object-contain" />
+      <img src="/progetti/a torino si (s)cambia/stories.png" alt="Stories" className="w-full object-contain" />
+      <img src="/progetti/a torino si (s)cambia/reel e facebook.png" alt="Reel e Facebook" className="w-full object-contain" />
+      <img src="/progetti/a torino si (s)cambia/tiktok.png" alt="TikTok" className="w-full object-contain" />
+    </div>
+  </>
+) : (
+  <>
+    <div className={`w-full h-80 bg-gradient-to-br ${categoryColor} opacity-10 flex items-center justify-center border border-white/5`}>
+      <span className="text-white/20 text-sm uppercase tracking-widest">Immagine principale</span>
+    </div>
+    <div className="grid grid-cols-3 gap-3">
+      {[1,2,3].map(i => (
+        <div key={i} className={`h-44 bg-gradient-to-br ${categoryColor} opacity-10 flex items-center justify-center border border-white/5`}>
+          <span className="text-white/20 text-xs uppercase tracking-widest">0{i}</span>
+        </div>
+      ))}
+    </div>
+    <div className="grid grid-cols-3 gap-3">
+      {[4,5,6].map(i => (
+        <div key={i} className={`h-44 bg-gradient-to-br ${categoryColor} opacity-10 flex items-center justify-center border border-white/5`}>
+          <span className="text-white/20 text-xs uppercase tracking-widest">0{i}</span>
+        </div>
+      ))}
+    </div>
+  </>
+)}
           </div>
         </div>
       </div>
-    );
+      
+   );
   };
 
   return (
@@ -480,10 +562,10 @@ export default function App() {
                 { name: 'Illustrator', category: 'Adobe', color: 'from-orange-500 to-amber-600' },
                 { name: 'InDesign', category: 'Adobe', color: 'from-pink-500 to-rose-600' },
                 { name: 'After Effects', category: 'Adobe', color: 'from-purple-500 to-violet-600' },
-                { name: 'Premiere Pro', category: 'Adobe', color: 'from-indigo-500 to-blue-600' },
-                { name: 'Figma', category: 'Design', color: 'from-purple-400 to-pink-500' },
+                { name: 'Rhinoceros', category: 'Cad', color: 'from-indigo-500 to-blue-600' },
+                { name: 'Figma', category: 'UI/UX', color: 'from-purple-400 to-pink-500' },
                 { name: 'Blender', category: '3D', color: 'from-orange-500 to-red-600' },
-                { name: 'Procreate', category: 'Illustration', color: 'from-pink-500 to-purple-600' }
+                { name: 'Procreate', category: 'Illustrazione', color: 'from-pink-500 to-purple-600' }
               ].map((tool, index) => (
                 <motion.div key={tool.name} className="group relative p-6 bg-zinc-900 border border-white/10 cursor-pointer overflow-hidden" initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: index * 0.05, duration: 0.4 }} whileHover={{ scale: 1.05, y: -5 }}>
                   <div className={`absolute inset-0 bg-gradient-to-br ${tool.color} opacity-0 group-hover:opacity-20 transition-opacity duration-300`} />
@@ -514,41 +596,68 @@ export default function App() {
               <span className="text-sm uppercase tracking-[0.3em] text-white/40">Mettiamoci in contatto</span>
               <motion.div className="h-1 w-16 bg-gradient-to-r from-pink-500 to-transparent" initial={{ width: 0 }} whileInView={{ width: '64px' }} viewport={{ once: true }} transition={{ delay: 0.3, duration: 0.8 }} />
             </div>
-            <h2 className="text-7xl lg:text-8xl font-black text-white text-center">CREIAMO INSIEME</h2>
+            <h2 className="text-7xl lg:text-8xl font-black text-white text-center">FACCIAMO DUE CHIACCHERE?</h2>
           </motion.div>
 
           <motion.p className="text-xl lg:text-2xl text-white/60 mb-16 max-w-2xl mx-auto" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.6, duration: 0.8 }}>
-            Hai un progetto in mente? Collaboriamo per dare vita alla tua visione con un design audace e creativo.
+            Sei in cerca di nuove idee o vuoi solo scambiare due parole su un progetto? Sono pronta a mettermi in gioco.
           </motion.p>
 
           <motion.div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-20" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.8, duration: 0.8 }}>
-            <motion.a href="mailto:hello@example.com" className="group relative px-12 py-6 bg-white text-black text-lg font-black uppercase tracking-wider overflow-hidden" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <motion.div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500" initial={{ x: '-100%' }} whileHover={{ x: 0 }} transition={{ duration: 0.3 }} />
-              <span className="relative z-10">Scrivimi</span>
-            </motion.a>
-            <motion.a href="#" className="group relative px-12 py-6 bg-transparent border-2 border-white text-white text-lg font-black uppercase tracking-wider overflow-hidden" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+           {/* --- SOSTITUISCI IL VECCHIO <motion.a> CON QUESTO --- */}
+<motion.button
+  onClick={() => setIsOpen(true)}
+  className="group relative px-12 py-6 bg-white text-black text-lg font-black uppercase tracking-wider overflow-hidden"
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+>
+  <motion.div 
+    className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500" 
+    initial={{ x: '-100%' }} 
+    whileHover={{ x: 0 }} 
+    transition={{ duration: 0.3 }} 
+  />
+  <span className="relative z-10">Scrivimi</span>
+</motion.button>
+  <motion.a 
+              href="#" 
+              className="group relative px-12 py-6 bg-transparent border-2 border-white text-white text-lg font-black uppercase tracking-wider overflow-hidden" 
+              whileHover={{ scale: 1.05 }} 
+              whileTap={{ scale: 0.95 }}
+            >
               <motion.div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500" initial={{ x: '-100%' }} whileHover={{ x: 0 }} transition={{ duration: 0.3 }} />
               <span className="relative z-10">Scarica CV</span>
             </motion.a>
           </motion.div>
 
           <motion.div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 1, duration: 0.8 }}>
-            {[
-              { name: 'Instagram', handle: '@designer', color: 'from-pink-500 to-purple-500' },
-              { name: 'Behance', handle: '/designer', color: 'from-blue-500 to-cyan-500' },
-              { name: 'LinkedIn', handle: '/in/designer', color: 'from-blue-600 to-indigo-500' },
-              { name: 'Dribbble', handle: '/designer', color: 'from-pink-500 to-rose-500' }
-            ].map((social, index) => (
-              <motion.a key={social.name} href="#" className="group relative p-6 bg-zinc-900 border border-white/10 overflow-hidden" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 1.1 + index * 0.1, duration: 0.6 }} whileHover={{ scale: 1.05 }}>
-                <motion.div className={`absolute inset-0 bg-gradient-to-br ${social.color} opacity-0 group-hover:opacity-20`} transition={{ duration: 0.3 }} />
-                <motion.div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${social.color}`} initial={{ scaleX: 0 }} whileHover={{ scaleX: 1 }} transition={{ duration: 0.3 }} />
-                <div className="relative z-10">
-                  <h4 className="text-lg font-black mb-1 text-white">{social.name}</h4>
-                  <p className="text-xs text-white/40 uppercase tracking-wider">{social.handle}</p>
-                </div>
-              </motion.a>
-            ))}
-          </motion.div>
+  {[
+    { name: 'Instagram', handle: '@noemicaldera1', color: 'from-pink-500 to-purple-500', url: 'https://www.instagram.com/noemicaldera1/' },
+    { name: 'Behance', handle: '/noemicaldera', color: 'from-blue-500 to-cyan-500', url: 'https://www.behance.net/noemicaldera' },
+    { name: 'LinkedIn', handle: '/in/noemi-caldera', color: 'from-blue-600 to-indigo-500', url: 'https://www.linkedin.com/in/noemi-caldera-a4a6712b0/' },
+    { name: 'Telegram', handle: '@noecaaal', color: 'from-sky-400 to-cyan-400', url: 'https://t.me/noecaaal' }
+  ].map((social, index) => (
+    <motion.a
+      key={social.name}
+      href={social.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group relative p-6 bg-zinc-900 border border-white/10 overflow-hidden"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: 1.1 + index * 0.1, duration: 0.6 }}
+      whileHover={{ scale: 1.05 }}
+    >
+      <motion.div className={`absolute inset-0 bg-gradient-to-br ${social.color} opacity-0 group-hover:opacity-20`} transition={{ duration: 0.3 }} />
+      <motion.div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${social.color}`} initial={{ scaleX: 0 }} whileHover={{ scaleX: 1 }} transition={{ duration: 0.3 }} />
+      <div className="relative z-10">
+        <h4 className="text-lg font-black mb-1 text-white">{social.name}</h4>
+        <p className="text-xs text-white/40 tracking-wider">{social.handle}</p>
+      </div>
+    </motion.a>
+  ))}
+</motion.div>
 
           <motion.div className="mt-20 pt-12 border-t border-white/10" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 1.5, duration: 0.8 }}>
             <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white/40">
@@ -558,6 +667,78 @@ export default function App() {
           </motion.div>
         </div>
       </section>
+      {/* Popup di Contatto in basso a destra */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            initial={{ opacity: 0, y: 100, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 100, scale: 0.9 }}
+            className="fixed bottom-8 right-8 z-[100] w-full max-w-sm bg-zinc-900 border border-white/10 p-8 shadow-2xl"
+          >
+            {/* Tasto X per chiudere */}
+            <button 
+              onClick={() => setIsOpen(false)}
+              className="absolute top-4 right-4 text-white/40 hover:text-white transition-colors"
+            >
+              <span className="text-2xl font-light">×</span>
+            </button>
+
+            <div className="mb-6">
+              <h3 className="text-xl font-black bg-gradient-to-r from-yellow-400 to-pink-500 bg-clip-text text-transparent uppercase tracking-wider">Nuovo Messaggio</h3>
+              <p className="text-xs text-white/40 mt-1">A: noemi.cal21@gmail.com</p>
+            </div>
+
+            <div className="space-y-4">
+  <div>
+    <p className="text-[10px] uppercase tracking-widest text-white/30 mb-1">Il tuo indirizzo email</p>
+    <input
+      type="email"
+      value={formData.from_email}
+      onChange={e => setFormData({...formData, from_email: e.target.value})}
+      placeholder="tua@email.com"
+      className="w-full p-3 bg-black/50 border border-white/10 text-sm text-white placeholder-white/20 focus:outline-none focus:border-white/30"
+    />
+  </div>
+
+  <div>
+    <p className="text-[10px] uppercase tracking-widest text-white/30 mb-1">Oggetto</p>
+    <input
+      type="text"
+      value={formData.subject}
+      onChange={e => setFormData({...formData, subject: e.target.value})}
+      className="w-full p-3 bg-black/50 border border-white/10 text-sm text-white focus:outline-none focus:border-white/30"
+    />
+  </div>
+
+  <div>
+    <p className="text-[10px] uppercase tracking-widest text-white/30 mb-1">Messaggio</p>
+    <textarea
+      value={formData.message}
+      onChange={e => setFormData({...formData, message: e.target.value})}
+      rows={4}
+      className="w-full p-3 bg-black/50 border border-white/10 text-sm text-white focus:outline-none focus:border-white/30 resize-none"
+    />
+  </div>
+
+  <motion.button
+    onClick={sendEmail}
+    disabled={sending || !formData.from_email}
+    className="block w-full py-4 bg-white text-black text-center font-black uppercase tracking-wider text-sm hover:bg-pink-500 hover:text-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+    whileHover={{ scale: 1.02 }}
+    whileTap={{ scale: 0.98 }}
+  >
+    {sent ? '✓ Inviato!' : sending ? 'Invio...' : 'Invia Messaggio'}
+  </motion.button>
+
+  <p className="text-[9px] text-center text-white/20 uppercase tracking-tighter">
+    Il messaggio verrà inviato direttamente a noemi.cal21@gmail.com
+  </p>
+</div>
+            
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
