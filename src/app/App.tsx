@@ -13,33 +13,33 @@ export default function App() {
   const [activeSection, setActiveSection] = useState('hero');
   const [expandedProject, setExpandedProject] = useState<number | null>(null);
 
-const form = useRef<HTMLFormElement>(null)
-const [isOpen, setIsOpen] = useState(false);
-const [formData, setFormData] = useState({
-  from_email: '',
-  subject: 'Collaboriamo?',
-  message: 'Ciao Noemi!\n\nHo visto il tuo portfolio, ti piacerebbe collaborare al mio progetto...?\n\n'
-});
-const [sending, setSending] = useState(false);
-const [sent, setSent] = useState(false); 
+  const form = useRef<HTMLFormElement>(null)
+  const [isOpen, setIsOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    from_email: '',
+    subject: 'Collaboriamo?',
+    message: 'Ciao Noemi!\n\nHo visto il tuo portfolio, ti piacerebbe collaborare al mio progetto...?\n\n'
+  });
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
 
-const sendEmail = async () => {
-  setSending(true);
-  try {
-   await emailjs.send(
-  'service_8dqweyj',
-  'template_afyqsb5',
-  formData,
-  'GLL375a4mIU3YDBa4'
-);
-    setSent(true);
-    setTimeout(() => { setSent(false); setIsOpen(false); }, 2000);
-  } catch (e) {
-    alert('Errore durante l\'invio. Riprova.');
-  } finally {
-    setSending(false);
-  }
-};
+  const sendEmail = async () => {
+    setSending(true);
+    try {
+      await emailjs.send(
+        'service_8dqweyj',
+        'template_afyqsb5',
+        formData,
+        'GLL375a4mIU3YDBa4'
+      );
+      setSent(true);
+      setTimeout(() => { setSent(false); setIsOpen(false); }, 2000);
+    } catch (e) {
+      alert('Errore durante l\'invio. Riprova.');
+    } finally {
+      setSending(false);
+    }
+  };
 
 
   useEffect(() => {
@@ -87,32 +87,32 @@ const sendEmail = async () => {
       name: 'Physical Design',
       color: 'from-purple-500 via-pink-500 to-red-500',
       projects: [
-        { id: 1, number: '01', title: 'Ricostruzione 3D di una torcia', subtitle: 'Industrial Design', year: '2023', description: 'AutoCAD, Rhinoceros, Blender, Illustrator', tools: ['AutoCAD', 'Rhinoceros', 'Blender', 'Illustrator'], process: ['Brief e debriefing', 'Studio morfologico', 'Modellazione 3D', 'Rendering e materiali', 'Tavole tecniche'] },
-        { id: 2, number: '02', title: 'Sfiorami', subtitle: 'Concept Design', year: '2024', description: 'Illustrator, Procreate, Rhinoceros, Photoshop', tools: ['Illustrator', 'Procreate', 'Rhinoceros', 'Photoshop'], process: ['Brief e debriefing', 'Studio esigenze e requisiti', 'Appunti metaprogettuali', 'Modellazione e verifica', 'Revisione a seguito di feedback', 'Prototipazione e ingegnerizzazione'] }
+        { id: 1, number: '01', title: 'Ricostruzione 3D di una torcia', subtitle: 'Industrial Design', year: '2023', description: 'AutoCAD, Rhinoceros, Blender, Illustrator', tools: ['AutoCAD', 'Rhinoceros', 'Blender', 'Illustrator'], process: ['Brief e debriefing', 'Studio morfologico', 'Modellazione 3D', 'Rendering e materiali', 'Tavole tecniche'] , hidden: true},
+        { id: 2, number: '01', title: 'Sfiorami', subtitle: 'Concept Design', year: '2024', description: 'Illustrator, Procreate, Rhinoceros, Photoshop', tools: ['Illustrator', 'Procreate', 'Rhinoceros', 'Photoshop'], process: ['Brief e debriefing', 'Studio esigenze e requisiti', 'Appunti metaprogettuali', 'Modellazione e verifica', 'Revisione a seguito di feedback', 'Prototipazione e ingegnerizzazione'] , hidden: false}
       ]
     },
     {
       name: 'Digital Design',
       color: 'from-blue-500 via-cyan-500 to-teal-500',
       projects: [
-        { id: 3, number: '03', title: 'Netway', subtitle: 'Communication e Branding Design', year: '2025', description: 'Illustrator, Photoshop, Figma', tools: ['Illustrator', 'Photoshop', 'Figma'], process: ['Analisi del brand', 'Moodboard e direzione visiva', 'Design del sistema', 'Applicazioni', 'Consegna'] },
-        { id: 4, number: '04', title: 'A Torino si (s)cambia', subtitle: 'Social Media Design', year: '2025', description: 'Figma, Photoshop, Illustrator', tools: ['Figma', 'Photoshop', 'Illustrator'], process: ['Brief e ricerca', 'Strategia di comunicazione', 'Design dei template', 'Revisione', 'Lancio'] }
+        { id: 3, number: '02', title: 'Netway', subtitle: 'Communication e Branding Design', year: '2025', description: 'Illustrator, Photoshop, Figma', tools: ['Illustrator', 'Photoshop', 'Figma'], process: ['Analisi strategica e ricerca', 'Analisi dei competitor', 'Definizione del target', 'Mappatura degli stakeholder', 'Brand positioning e strategy', 'Payoff e naming', 'Definizione dell\'identità visiva', 'Sviluppo del sistema grafico e tone of voice', 'Brand manual / linee guida', 'Design dei supporti e layout', 'Realizzazione degli applicativi e brand experience', 'Strategia di comunicazione social', 'Implementazione digitale sito web'] , hidden: false},
+        { id: 4, number: '03', title: 'A Torino si (s)cambia', subtitle: 'Social Media Design', year: '2025', description: 'Figma, Photoshop, Illustrator', tools: ['Figma', 'Photoshop', 'Illustrator'], process: ['Stato dell\'arte e analisi aziendale', 'Benchmarking e analisi dei competitor', 'Analisi del target e personas', 'Definizione obiettivi SMART', 'Digital storytelling e scelta dell\'archetipo', 'Definizione tone of voice e strategia di comunicazione', 'Identificazione touchpoint e canali social', 'Sviluppo content pillar e rubriche', 'Copywriting e produzione dei mockup', 'Pianificazione calendario editoriale mensile', 'Piano di distribuzione per touchpoint', 'Contingency plan e sistemi di monitoring'] , hidden: false}
       ]
     },
     {
       name: 'Visual Design',
       color: 'from-orange-500 via-amber-500 to-yellow-500',
       projects: [
-        { id: 5, number: '05', title: 'Artelier', subtitle: 'UX/UI Design', year: '2025', description: 'Figma, Illustrator', tools: ['Figma', 'Illustrator'], process: ['Ricerca utente', 'Wireframing', 'Prototipo interattivo', 'Test usabilità', 'UI finale'] },
-        { id: 6, number: '06', title: 'Portfolio web', subtitle: 'Web Design', year: '2025', description: 'Visual Studio Code, Figma', tools: ['VS Code', 'Figma', 'React'], process: ['Concept e wireframe', 'Design system', 'Sviluppo frontend', 'Animazioni', 'Deploy'] }
+        { id: 5, number: '04', title: 'Artelier', subtitle: 'UX/UI Design', year: '2025', description: 'Figma, Illustrator', tools: ['Figma', 'Illustrator'], process: ['Ricerca utente', 'Wireframing', 'Prototipo interattivo', 'Test usabilità', 'UI finale'] , hidden: false},
+        { id: 6, number: '06', title: 'Portfolio web', subtitle: 'Web Design', year: '2025', description: 'Visual Studio Code, Figma', tools: ['VS Code', 'Figma', 'React'], process: ['Concept e wireframe', 'Design system', 'Sviluppo frontend', 'Animazioni', 'Deploy'] , hidden: true}
       ]
     },
     {
       name: 'Strategic Design',
       color: 'from-green-500 via-emerald-500 to-lime-500',
       projects: [
-        { id: 7, number: '07', title: 'Lo stereo che risuona', subtitle: 'Scenario Design', year: '2024', description: 'Illustrator, Rhinoceros, Procreate', tools: ['Illustrator', 'Rhinoceros', 'Procreate'], process: ['Analisi scenario', 'Vision futura', 'Concept design', 'Narrazione visiva', 'Presentazione'] },
-        { id: 8, number: '08', title: 'Hacking di un packaging', subtitle: 'Sustainable Design', year: '2024', description: 'Illustrator, Rhinoceros, Blender', tools: ['Illustrator', 'Rhinoceros', 'Blender'], process: ['Ricerca materiali', 'Analisi ciclo di vita', 'Redesign sostenibile', 'Prototipazione', 'Valutazione impatto'] }
+        { id: 7, number: '07', title: 'Lo stereo che risuona', subtitle: 'Scenario Design', year: '2024', description: 'Illustrator, Rhinoceros, Procreate', tools: ['Illustrator', 'Rhinoceros', 'Procreate'], process: ['Analisi scenario', 'Vision futura', 'Concept design', 'Narrazione visiva', 'Presentazione'] , hidden: true},
+        { id: 8, number: '05', title: 'Hacking di un packaging', subtitle: 'Sustainable Design', year: '2024', description: 'Illustrator, Rhinoceros, Blender', tools: ['Illustrator', 'Rhinoceros', 'Blender'], process: ['Ricerca materiali', 'Analisi ciclo di vita', 'Redesign sostenibile', 'Prototipazione', 'Valutazione impatto'] , hidden: false}
       ]
     }
   ];
@@ -121,50 +121,71 @@ const sendEmail = async () => {
 
   // Mappa colori Tailwind → CSS per i gradienti SVG stroke
   const strokeColors: Record<string, [string, string]> = {
-    'from-purple-500 via-pink-500 to-red-500':   ['#a855f7', '#ef4444'],
-    'from-blue-500 via-cyan-500 to-teal-500':    ['#3b82f6', '#14b8a6'],
-    'from-orange-500 via-amber-500 to-yellow-500':['#f97316', '#eab308'],
+    'from-purple-500 via-pink-500 to-red-500': ['#a855f7', '#ef4444'],
+    'from-blue-500 via-cyan-500 to-teal-500': ['#3b82f6', '#14b8a6'],
+    'from-orange-500 via-amber-500 to-yellow-500': ['#f97316', '#eab308'],
     'from-green-500 via-emerald-500 to-lime-500': ['#22c55e', '#84cc16'],
   };
+/* ... (mappa strokeColors e Project type invariati) ... */
 
-  const getExpandedContent = (project: Project, categoryColor: string) => {
-    const isSfiorami = project.id === 2;
-    return (
-      <div
-        className="relative z-20 p-12 bg-zinc-900"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="flex items-center gap-4 mb-12">
-          <div className={`h-1 w-16 bg-gradient-to-r ${categoryColor}`} />
-          <p className="text-xs uppercase tracking-[0.3em] text-white/40">{project.year} — {project.subtitle}</p>
-        </div>
-
+const getExpandedContent = (project: Project, categoryColor: string) => {
+  const isSfiorami = project.id === 2;
+  
+  return (
+    <div
+      className="relative z-20 p-12 bg-zinc-900"
+      onClick={(e) => e.stopPropagation()}
+    >
+      {/* Container principale in Flex Column per permettere il layout misto */}
+      <div className="flex flex-col gap-16">
+        
+        {/* PARTE SUPERIORE: Testi + Immagine Principale (Layout a 2 colonne) */}
         <div className={`grid gap-16 ${project.id === 4 ? 'lg:grid-cols-2' : 'lg:grid-cols-[1fr_1.4fr]'}`}>
+          
+          {/* Colonna Sinistra: Descrizioni, Processo e Strumenti */}
           <div className="flex flex-col gap-10">
             <div>
-              <h2 className={`text-6xl font-black leading-none mb-2 bg-gradient-to-r ${categoryColor} bg-clip-text text-transparent`}>{project.title}</h2>
-              <p className="text-xl text-white/40 font-black uppercase tracking-wider mb-8">{project.subtitle}</p>
+              <h2 className={`text-6xl font-black leading-none mb-2 bg-gradient-to-r ${categoryColor} bg-clip-text text-transparent`}>
+                {project.title}
+              </h2>
+              <p className="text-xl text-white/40 font-black uppercase tracking-wider mb-8">
+                {project.subtitle}
+              </p>
+              
+              {/* Testi descrittivi basati sull'ID */}
               {isSfiorami ? (
                 <>
                   <p className="text-white/80 leading-relaxed mb-4">
-                    "Sfiorami" è un progetto innovativo ed educativo destinato agli studenti delle scuole superiori, progettato per rendere l'educazione sessuale accessibile, coinvolgente e priva di intimidazioni.
+                    "Sfiorami" è un progetto innovativo ed educativo destinato agli studenti delle scuole superiori, progettato per rendere l'educazione sessuale accessibile, coinvolgente e priva di intimidazioni. L'iniziativa mira a trasformare l'apprendimento in un'esperienza collettiva, migliorando la comprensione e il dialogo tra i giovani su temi fondamentali come la sessualità e l'affettività, con l'obiettivo di formare una generazione più informata e consapevole.
                   </p>
                   <p className="text-white/60 leading-relaxed text-sm">
-                    Il packaging include una busta con grafiche accattivanti, un fiore su talloncino pretagliato e carte educative con quiz e domande che stimolano la discussione. Il fiore passa di mano in mano tra i compagni, favorendo partecipazione attiva, comunità e rispetto reciproco. Il design riduce lo stigma attorno a questi temi promuovendo un dialogo aperto e senza giudizi.
+                    Il packaging creativo include una busta con grafiche accattivanti che racchiude un talloncino pretagliato con un fiore e un set di carte informative e inclusive, rispettose di tutte le identità e orientamenti. Il fiore diventa il fulcro simbolico dell'attività: passando di mano in mano, abilita chi lo detiene a partecipare attivamente alla discussione, stimolando un dialogo aperto e senza giudizi. Attraverso quiz e domande che incoraggiano la partecipazione, il design riduce lo stigma associato a questi argomenti, promuovendo un senso di comunità e rispetto reciproco tra gli studenti.
                   </p>
                 </>
-              ) : (
+              ) : project.id === 3 ? (
                 <>
                   <p className="text-white/80 leading-relaxed mb-4">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+                    Netway è un progetto di brand identity per una startup che organizza viaggi di istruzione, promossa dall'ONU. Il nostro compito era costruire tutto da zero: naming, logo, identità visiva e una strategia di contenuti social coerente con la visione del brand.
                   </p>
                   <p className="text-white/60 leading-relaxed text-sm">
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    Il nome nasce dalla fusione di Net, networking, connessioni, scambio, e Way, il cammino. Il payoff Embrace your path sintetizza l'anima de
+progetto: un invito a vivere il proprio percorso con coraggio. L'identità visiva traduce questi valori in un sistema grafico riconoscibile, con una palette che combina blu profondi, viola intensi e fucsia vibranti. La strategia social accompagna |'utente in ogni fase; dalla scoperta del brand fino alla costruzione di una community attiva, prima, durante e dopo il viaggio.
+
                   </p>
                 </>
-              )}
+              ) : project.id === 4 ? (
+                <>
+                  <p className="text-white/80 leading-relaxed mb-4">
+                    "A Torino si (s)cambia" è una campagna social nata per Swap Party TO con l'obiettivo di rendere l'economia circolare un’abitudine coinvolgente. L'idea è quella di trasformare il baratto in un'esperienza collettiva, parlando direttamente a Gen Z e Millennials. A seguito di uno studio dello stato dell'arte e un attento benchmarking, abbiamo definito un archetipo di brand e un tono di voce fresco e motivazionale, capace di portare le persone dai social agli eventi fisici in città.
+                  </p>
+                  <p className="text-white/60 leading-relaxed text-sm">
+                    La narrazione è strutturata su cinque pillar strategici, declinati in rubriche specifiche per Instagram, TikTok e Facebook. Il lavoro ha prodotto un calendario editoriale mensile completo, includendo la produzione di copywriting, mockup grafici per ogni touchpoint e un contingency plan, garantendo una gestione dinamica dei flussi di comunicazione.
+                  </p>
+                </>
+              ) : null}
             </div>
 
+            {/* Sezione Processo */}
             <div>
               <div className="flex items-center gap-4 mb-6">
                 <div className={`h-px w-8 bg-gradient-to-r ${categoryColor}`} />
@@ -173,132 +194,113 @@ const sendEmail = async () => {
               <div className="flex flex-col gap-4">
                 {project.process.map((step, i) => (
                   <div key={i} className="flex items-center gap-4">
-                    <span className={`text-sm font-black bg-gradient-to-r ${categoryColor} bg-clip-text text-transparent w-8`}>{String(i+1).padStart(2,'0')}</span>
+                    <span className={`text-sm font-black bg-gradient-to-r ${categoryColor} bg-clip-text text-transparent w-8`}>
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
                     <div className="h-px flex-1 bg-white/10" />
                     <span className="text-white/60 text-sm">{step}</span>
                   </div>
                 ))}
               </div>
             </div>
-<div>
+
+            {/* Sezione Strumenti */}
+            <div>
               <div className="flex items-center gap-4 mb-6">
                 <div className={`h-px w-8 bg-gradient-to-r ${categoryColor}`} />
                 <p className="text-xs uppercase tracking-[0.3em] text-white/40">Strumenti</p>
               </div>
               <div className="flex flex-wrap gap-3">
                 {project.tools.map(tool => (
-                  <span key={tool} className="px-4 py-2 border border-white/10 text-white/50 text-xs uppercase tracking-widest hover:border-white/30 hover:text-white/80 transition-colors duration-200">{tool}</span>
+                  <span key={tool} className="px-4 py-2 border border-white/10 text-white/50 text-xs uppercase tracking-widest">
+                    {tool}
+                  </span>
                 ))}
               </div>
             </div>
 
+            {/* Tavole A3 sotto i testi (Colonna Sinistra) */}
             {project.id === 4 && (
-              <div>
-                <div className="flex items-center gap-4 mb-13">
-                </div>
-                <div className="grid grid-cols-2 gap-8">
+              <div className="mt-4">
+                <div className="grid grid-cols-2 gap-7">
                   <img src="/progetti/a torino si (s)cambia/indice.png" alt="Indice" className="w-full object-contain" />
-                  <img src="/progetti/a torino si (s)cambia/boa2rd.png" alt="Boa2rd" className="w-full object-contain" />
-                  <img src="/progetti/a torino si (s)cambia/digital storytelling.png" alt="Digital storytelling" className="w-full object-contain" />
-                  <img src="/progetti/a torino si (s)cambia/pillar.png" alt="Pillar" className="w-full object-contain" />
-                  <img src="/progetti/a torino si (s)cambia/rubriche.png" alt="Rubriche" className="w-full object-contain" />
+                  <img src="/progetti/a torino si (s)cambia/boa2rd.png" alt="Analisi Boa2rd" className="w-full object-contain" />
+                  <img src="/progetti/a torino si (s)cambia/digital storytelling.png" alt="Digital Storytelling" className="w-full object-contain" />
+                  <img src="/progetti/a torino si (s)cambia/pillar.png" alt="Strategia Social" className="w-full object-contain" />
+                  <img src="/progetti/a torino si (s)cambia/rubriche.png" alt="Rubriche Social" className="w-full object-contain" />
                   <img src="/progetti/a torino si (s)cambia/monitoring.png" alt="Monitoring" className="w-full object-contain" />
-                  <img src="/progetti/a torino si (s)cambia/contingency plan.png" alt="Contingency plan" className="w-full object-contain" />
-                  <img src="/progetti/a torino si (s)cambia/practise.png" alt="Practise" className="w-full object-contain" />
+                  <img src="/progetti/a torino si (s)cambia/contingency plan.png" alt="Contingency Plan" className="w-full object-contain" />
+                  <img src="/progetti/a torino si (s)cambia/practise.png" alt="Conclusioni" className="w-full object-contain" />
                 </div>
               </div>
             )}
+          </div> {/* Chiusura Colonna Sinistra */}
 
-          </div>{/* ← chiude flex flex-col gap-10 (colonna sinistra) */}
-
-          {/* Colonna immagini */}
+          {/* Colonna Destra */}
           <div className="flex flex-col gap-4">
             {isSfiorami ? (
-              <>
-                <div className="w-full h-80 overflow-hidden bg-zinc-800">
-                  <img src="/progetti/sfiorami/packaging esterno.png" alt="packaging esterno" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+              <div className="flex flex-col gap-4 w-full">
+                <div className="overflow-hidden rounded-lg">
+                  <img src="/progetti/sfiorami/packaging esterno.png" alt="packaging esterno" className="w-full object-contain" />
                 </div>
-                <div className="grid grid-cols-3 gap-3">
-                  <div className="h-44 overflow-hidden bg-zinc-800 col-span-1">
-                    <img src="/progetti/sfiorami/packaging interno.png" alt="packaging interno" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-                  </div>
-                  <div className="h-44 overflow-hidden bg-zinc-800 col-span-1">
-                    <img src="/progetti/sfiorami/packaging aperto.png" alt="packaging aperto" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-                  </div>
-                  <div className="h-44 overflow-hidden bg-zinc-800 col-span-1">
-                    <img src="/progetti/sfiorami/carte fronte.png" alt="carte fronte" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-                  </div>
+                <div className="overflow-hidden rounded-lg">
+                  <img src="/progetti/sfiorami/packaging interno.png" alt="packaging interno" className="w-full object-contain" />
                 </div>
-                <div className="grid grid-cols-3 gap-3">
-                  <div className="h-44 overflow-hidden bg-zinc-800">
-                    <img src="/progetti/sfiorami/fiore femmina.png" alt="fiore femmina" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-                  </div>
-                  <div className="h-44 overflow-hidden bg-zinc-800">
-                    <img src="/progetti/sfiorami/fiore maschio.png" alt="fiore maschio" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-                  </div>
-                  <div className="h-44 overflow-hidden bg-zinc-800">
-                    <img src="/progetti/sfiorami/carte retro.png" alt="carte retro" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-                  </div>
-                </div>
-              </>
+              </div>
             ) : project.id === 3 ? (
-  <>
-    <div className="grid grid-cols-2 gap-3">
-      <img src="/progetti/netway/logo e logotipo.png" alt="Logo e logotipo" className="w-full h-48 object-contain" />
-      <img src="/progetti/netway/tipografia.png" alt="Tipografia" className="w-full h-48 object-contain" />
-      <img src="/progetti/netway/palette.png" alt="Palette" className="w-full h-48 object-contain" />
-      <img src="/progetti/netway/area di rispetto.png" alt="Area di rispetto" className="w-full h-48 object-contain" />
-    </div>
-    <img src="/progetti/netway/verticalizzazione.png" alt="Verticalizzazione" className="w-full object-contain" />
-    <img src="/progetti/netway/2.png" alt="Social media" className="w-full object-contain" />
-    <img src="/progetti/netway/3.png" alt="Web e brochure" className="w-full object-contain" />
-    <img src="/progetti/netway/4.png" alt="Merchandising" className="w-full object-contain" />
-  </>
-) : project.id === 4 ? (
-  <>
-    {/* Mockup chiuso */}
-    <div className="w-full h-[380px] overflow-hidden rounded">
-      <img src="/progetti/a torino si (s)cambia/mockup chiuso.png" alt="Mockup chiuso" className="w-full h-full object-cover object-center scale-[1.4]" />
-    </div>
+              <div className="flex flex-col gap-4">
+                <div className="grid grid-cols-2 gap-3">
+                  <img src="/progetti/netway/logo e logotipo.png" alt="Logo e logotipo" className="w-full h-48 object-contain" />
+                  <img src="/progetti/netway/tipografia.png" alt="Tipografia" className="w-full h-48 object-contain" />
+                  <img src="/progetti/netway/palette.png" alt="Palette" className="w-full h-48 object-contain" />
+                  <img src="/progetti/netway/area di rispetto.png" alt="Area di rispetto" className="w-full h-48 object-contain" />
+                </div>
+                <img src="/progetti/netway/verticalizzazione.png" alt="Verticalizzazione" className="w-full object-contain" />
+                <img src="/progetti/netway/2.png" alt="Social media" className="w-full object-contain" />
+                <img src="/progetti/netway/3.png" alt="Web e brochure" className="w-full object-contain" />
+                <img src="/progetti/netway/4.png" alt="Merchandising" className="w-full object-contain" />
+              </div>
+            ) : project.id === 4 ? (
+              <div className="flex flex-col gap-4">
+                <div className="w-full h-[380px] overflow-hidden rounded">
+                  <img src="/progetti/a torino si (s)cambia/mockup chiuso.png" alt="Mockup chiuso" className="w-full h-full object-cover object-center scale-[1.4]" />
+                </div>
+                <div className="w-full h-[380px] overflow-hidden rounded">
+                  <img src="/progetti/a torino si (s)cambia/mockup aperto.png" alt="Mockup aperto" className="w-full h-full object-cover object-center scale-[1.4]" />
+                </div>
+                <div className="flex flex-col gap-4 mt-10">
+                  <img src="/progetti/a torino si (s)cambia/post.png" alt="Post" className="w-full object-contain" />
+                  <img src="/progetti/a torino si (s)cambia/stories.png" alt="Stories" className="w-full object-contain" />
+                  <img src="/progetti/a torino si (s)cambia/reel e facebook.png" alt="Reel e Facebook" className="w-full object-contain" />
+                  <img src="/progetti/a torino si (s)cambia/tiktok.png" alt="TikTok" className="w-full object-contain" />
+                </div>
+              </div>
+            ) : (
+              <div className={`w-full h-80 bg-gradient-to-br ${categoryColor} opacity-10 flex items-center justify-center border border-white/5`}>
+                <span className="text-white/20 text-sm uppercase tracking-widest">Immagine principale</span>
+              </div>
+            )}
+          </div> {/* Chiusura Colonna Destra */}
+        </div> {/* Chiusura Grid Parte Superiore */}
 
-    {/* Mockup aperto */}
-    <div className="w-full h-[380px] overflow-hidden rounded">
-      <img src="/progetti/a torino si (s)cambia/mockup aperto.png" alt="Mockup aperto" className="w-full h-full object-cover object-center scale-[1.4]" />
-    </div>
-
-    {/* Social — larghezza piena */}
-    <img src="/progetti/a torino si (s)cambia/post.png" alt="Post" className="w-full object-contain" />
-    <img src="/progetti/a torino si (s)cambia/stories.png" alt="Stories" className="w-full object-contain" />
-    <img src="/progetti/a torino si (s)cambia/reel e facebook.png" alt="Reel e Facebook" className="w-full object-contain" />
-    <img src="/progetti/a torino si (s)cambia/tiktok.png" alt="TikTok" className="w-full object-contain" />
-  </>
-) : (
-  <>
-    <div className={`w-full h-80 bg-gradient-to-br ${categoryColor} opacity-10 flex items-center justify-center border border-white/5`}>
-      <span className="text-white/20 text-sm uppercase tracking-widest">Immagine principale</span>
-    </div>
-    <div className="grid grid-cols-3 gap-3">
-      {[1,2,3].map(i => (
-        <div key={i} className={`h-44 bg-gradient-to-br ${categoryColor} opacity-10 flex items-center justify-center border border-white/5`}>
-          <span className="text-white/20 text-xs uppercase tracking-widest">0{i}</span>
-        </div>
-      ))}
-    </div>
-    <div className="grid grid-cols-3 gap-3">
-      {[4,5,6].map(i => (
-        <div key={i} className={`h-44 bg-gradient-to-br ${categoryColor} opacity-10 flex items-center justify-center border border-white/5`}>
-          <span className="text-white/20 text-xs uppercase tracking-widest">0{i}</span>
-        </div>
-      ))}
-    </div>
-  </>
-)}
+        {/* PARTE INFERIORE: A tutta larghezza (Solo per Sfiorami) */}
+        {isSfiorami && (
+          <div className="flex flex-col gap-4 w-full">
+            <div className="grid grid-cols-3 gap-3">
+              <img src="/progetti/sfiorami/carte fronte.png" alt="carte fronte" className="w-full object-contain" />
+              <img src="/progetti/sfiorami/carte retro.png" alt="carte retro" className="w-full object-contain" />
+              <div className="flex flex-col gap-3">
+                <img src="/progetti/sfiorami/fiore femmina.png" alt="fiore femmina" className="w-full object-contain" />
+                <img src="/progetti/sfiorami/fiore maschio.png" alt="fiore maschio" className="w-full object-contain" />
+              </div>
+            </div>
+            <img src="/progetti/sfiorami/tavola tecnica, esecutiva, tabella esigenziale e di presentazione.png" alt="tavola tecnica" className="w-full object-contain" />
           </div>
-        </div>
-      </div>
-      
-   );
-  };
+        )}
+      </div> {/* Chiusura Flex Col principale */}
+    </div>
+  );
+};
 
   return (
     <div ref={containerRef} className="bg-black text-white" onClick={() => setExpandedProject(null)}>
@@ -397,7 +399,7 @@ const sendEmail = async () => {
                 </div>
 
                 <div className="grid lg:grid-cols-2 gap-8">
-                  {category.projects.map((project, projIndex) => {
+                  {category.projects.filter(p => !p.hidden).map((project, projIndex) => {
                     const isExpanded = expandedProject === project.id;
                     return (
                       <motion.div
@@ -415,66 +417,83 @@ const sendEmail = async () => {
                         onClick={(e) => { e.stopPropagation(); setExpandedProject(isExpanded ? null : project.id); }}
                       >
                         {/* 1. Banda laterale */}
-<div className={`absolute top-0 left-0 w-1 h-full bg-gradient-to-b ${category.color} z-30`} />
+                        <div className={`absolute top-0 left-0 w-1 h-full bg-gradient-to-b ${category.color} z-30`} />
 
-{/* Stato chiuso */}
-<AnimatePresence mode="wait">
-  {!isExpanded && (
-    <motion.div
-      key="closed"
-      className="absolute inset-0 overflow-hidden"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.2 }}
-    >
-      {/* Background */}
-      <div className="absolute inset-0 bg-zinc-800 transition-transform duration-600 ease-out group-hover:scale-110" />
+                        {/* Stato chiuso */}
+                        <AnimatePresence mode="wait">
+                          {!isExpanded && (
+                            <motion.div
+                              key="closed"
+                              className="absolute inset-0 overflow-hidden"
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              exit={{ opacity: 0 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              {/* Background */}
+                              <div className="absolute inset-0 bg-zinc-800 transition-transform duration-600 ease-out group-hover:scale-110" />
 
-      {/* Cerchio Animato */}
-      <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full bg-gradient-to-br ${category.color} opacity-0 group-hover:opacity-60 scale-0 group-hover:scale-[20] transition-all duration-700 ease-out z-10`} />
+                              {/* Cerchio Animato */}
+                              <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full bg-gradient-to-br ${category.color} opacity-0 group-hover:opacity-60 scale-0 group-hover:scale-[20] transition-all duration-700 ease-out z-10`} />
 
-      {/* Numero in alto a destra — solo absolute, z-20 per stare sopra il cerchio */}
-      <div className="absolute top-0 right-0 p-8 transition-transform duration-[1500ms] ease-out group-hover:rotate-[360deg] z-20">
-        <span className="text-[12rem] font-black leading-none text-white/5 group-hover:text-white/10 transition-colors duration-300">
-          {project.number}
-        </span>
-      </div>
+                              {/* Numero in alto a destra — solo absolute, z-20 per stare sopra il cerchio */}
+                              <div className="absolute top-0 right-0 p-8 transition-transform duration-[1500ms] ease-out group-hover:rotate-[360deg] z-20">
+                                <span className="text-[12rem] font-black leading-none text-white/5 group-hover:text-white/10 transition-colors duration-300">
+                                  {project.number}
+                                </span>
+                              </div>
 
-      {/* Info in basso — z-20 per stare sopra tutto */}
-      <div className="absolute bottom-0 left-0 right-0 p-10 bg-gradient-to-t from-black via-black/80 to-transparent z-20">
-        <p className={`text-xs uppercase tracking-widest bg-gradient-to-r ${category.color} bg-clip-text text-transparent mb-3`}>
-          {project.year}
-        </p>
-        <h4 className="text-5xl font-black leading-none mb-2 text-white">
-          {project.title}
-        </h4>
-        <h5 className="text-3xl font-black leading-none text-white/60 mb-4">
-          {project.subtitle}
-        </h5>
-        <p className="text-sm text-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          {project.description}
-        </p>
-      </div>
+                              {/* Info in basso — z-20 per stare sopra tutto */}
+<div className="absolute bottom-0 left-0 right-0 p-10 bg-gradient-to-t from-black via-black/80 to-transparent z-20">
+  <p className={`text-xs uppercase tracking-widest bg-gradient-to-r ${category.color} bg-clip-text text-transparent mb-3`}>
+    {project.year}
+  </p>
 
-    </motion.div>
+  {/* Contenitore Titolo + PNG Decorativo */}
+<div className="relative inline-block mb-2">
+  <h4 className="text-5xl font-black leading-none text-white">
+    {project.title}
+  </h4>
+
+  {/* Immagine PNG logo */}
+  {project.id === 2 && ( 
+    <img 
+      src="/progetti/sfiorami/sfiorami logo.png" 
+      alt="decorazione"
+      className="absolute top-[-250px] left-0 w-full h-auto pointer-events-none 
+                 transition-opacity duration-300
+                 opacity-100 group-hover:opacity-0 z-30" 
+    />
   )}
-</AnimatePresence>
+</div>
 
-{/* Stato espanso */}
-<AnimatePresence mode="wait">
-  {isExpanded && (
-    <motion.div
-      key="expanded"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.4, delay: 0.1 }}
-    >
-      {getExpandedContent(project, category.color)}
-    </motion.div>
-  )}
-</AnimatePresence>
+  <h5 className="text-3xl font-black leading-none text-white/60 mb-4">
+    {project.subtitle}
+  </h5>
+  
+  <p className="text-sm text-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+    {project.description}
+  </p>
+</div>
+
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+
+                        {/* Stato espanso */}
+                        <AnimatePresence mode="wait">
+                          {isExpanded && (
+                            <motion.div
+                              key="expanded"
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              exit={{ opacity: 0 }}
+                              transition={{ duration: 0.4, delay: 0.1 }}
+                            >
+                              {getExpandedContent(project, category.color)}
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
                       </motion.div>
                     );
                   })}
@@ -600,25 +619,25 @@ const sendEmail = async () => {
           </motion.p>
 
           <motion.div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-20" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.8, duration: 0.8 }}>
-           {/* --- SOSTITUISCI IL VECCHIO <motion.a> CON QUESTO --- */}
-<motion.button
-  onClick={() => setIsOpen(true)}
-  className="group relative px-12 py-6 bg-white text-black text-lg font-black uppercase tracking-wider overflow-hidden"
-  whileHover={{ scale: 1.05 }}
-  whileTap={{ scale: 0.95 }}
->
-  <motion.div 
-    className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500" 
-    initial={{ x: '-100%' }} 
-    whileHover={{ x: 0 }} 
-    transition={{ duration: 0.3 }} 
-  />
-  <span className="relative z-10">Scrivimi</span>
-</motion.button>
-  <motion.a 
-              href="#" 
-              className="group relative px-12 py-6 bg-transparent border-2 border-white text-white text-lg font-black uppercase tracking-wider overflow-hidden" 
-              whileHover={{ scale: 1.05 }} 
+            {/* --- SOSTITUISCI IL VECCHIO <motion.a> CON QUESTO --- */}
+            <motion.button
+              onClick={() => setIsOpen(true)}
+              className="group relative px-12 py-6 bg-white text-black text-lg font-black uppercase tracking-wider overflow-hidden"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500"
+                initial={{ x: '-100%' }}
+                whileHover={{ x: 0 }}
+                transition={{ duration: 0.3 }}
+              />
+              <span className="relative z-10">Scrivimi</span>
+            </motion.button>
+            <motion.a
+              href="#"
+              className="group relative px-12 py-6 bg-transparent border-2 border-white text-white text-lg font-black uppercase tracking-wider overflow-hidden"
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               <motion.div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500" initial={{ x: '-100%' }} whileHover={{ x: 0 }} transition={{ duration: 0.3 }} />
@@ -627,33 +646,33 @@ const sendEmail = async () => {
           </motion.div>
 
           <motion.div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 1, duration: 0.8 }}>
-  {[
-    { name: 'Instagram', handle: '@noemicaldera1', color: 'from-pink-500 to-purple-500', url: 'https://www.instagram.com/noemicaldera1/' },
-    { name: 'Behance', handle: '/noemicaldera', color: 'from-blue-500 to-cyan-500', url: 'https://www.behance.net/noemicaldera' },
-    { name: 'LinkedIn', handle: '/in/noemi-caldera', color: 'from-blue-600 to-indigo-500', url: 'https://www.linkedin.com/in/noemi-caldera-a4a6712b0/' },
-    { name: 'Telegram', handle: '@noecaaal', color: 'from-sky-400 to-cyan-400', url: 'https://t.me/noecaaal' }
-  ].map((social, index) => (
-    <motion.a
-      key={social.name}
-      href={social.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group relative p-6 bg-zinc-900 border border-white/10 overflow-hidden"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: 1.1 + index * 0.1, duration: 0.6 }}
-      whileHover={{ scale: 1.05 }}
-    >
-      <motion.div className={`absolute inset-0 bg-gradient-to-br ${social.color} opacity-0 group-hover:opacity-20`} transition={{ duration: 0.3 }} />
-      <motion.div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${social.color}`} initial={{ scaleX: 0 }} whileHover={{ scaleX: 1 }} transition={{ duration: 0.3 }} />
-      <div className="relative z-10">
-        <h4 className="text-lg font-black mb-1 text-white">{social.name}</h4>
-        <p className="text-xs text-white/40 tracking-wider">{social.handle}</p>
-      </div>
-    </motion.a>
-  ))}
-</motion.div>
+            {[
+              { name: 'Instagram', handle: '@noemicaldera1', color: 'from-pink-500 to-purple-500', url: 'https://www.instagram.com/noemicaldera1/' },
+              { name: 'Behance', handle: '/noemicaldera', color: 'from-blue-500 to-cyan-500', url: 'https://www.behance.net/noemicaldera' },
+              { name: 'LinkedIn', handle: '/in/noemi-caldera', color: 'from-blue-600 to-indigo-500', url: 'https://www.linkedin.com/in/noemi-caldera-a4a6712b0/' },
+              { name: 'Telegram', handle: '@noecaaal', color: 'from-sky-400 to-cyan-400', url: 'https://t.me/noecaaal' }
+            ].map((social, index) => (
+              <motion.a
+                key={social.name}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative p-6 bg-zinc-900 border border-white/10 overflow-hidden"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 1.1 + index * 0.1, duration: 0.6 }}
+                whileHover={{ scale: 1.05 }}
+              >
+                <motion.div className={`absolute inset-0 bg-gradient-to-br ${social.color} opacity-0 group-hover:opacity-20`} transition={{ duration: 0.3 }} />
+                <motion.div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${social.color}`} initial={{ scaleX: 0 }} whileHover={{ scaleX: 1 }} transition={{ duration: 0.3 }} />
+                <div className="relative z-10">
+                  <h4 className="text-lg font-black mb-1 text-white">{social.name}</h4>
+                  <p className="text-xs text-white/40 tracking-wider">{social.handle}</p>
+                </div>
+              </motion.a>
+            ))}
+          </motion.div>
 
           <motion.div className="mt-20 pt-12 border-t border-white/10" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 1.5, duration: 0.8 }}>
             <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white/40">
@@ -666,14 +685,14 @@ const sendEmail = async () => {
       {/* Popup di Contatto in basso a destra */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 100, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 100, scale: 0.9 }}
             className="fixed bottom-8 right-8 z-[100] w-full max-w-sm bg-zinc-900 border border-white/10 p-8 shadow-2xl"
           >
             {/* Tasto X per chiudere */}
-            <button 
+            <button
               onClick={() => setIsOpen(false)}
               className="absolute top-4 right-4 text-white/40 hover:text-white transition-colors"
             >
@@ -686,52 +705,52 @@ const sendEmail = async () => {
             </div>
 
             <div className="space-y-4">
-  <div>
-    <p className="text-[10px] uppercase tracking-widest text-white/30 mb-1">Il tuo indirizzo email</p>
-    <input
-      type="email"
-      value={formData.from_email}
-      onChange={e => setFormData({...formData, from_email: e.target.value})}
-      placeholder="tua@email.com"
-      className="w-full p-3 bg-black/50 border border-white/10 text-sm text-white placeholder-white/20 focus:outline-none focus:border-white/30"
-    />
-  </div>
+              <div>
+                <p className="text-[10px] uppercase tracking-widest text-white/30 mb-1">Il tuo indirizzo email</p>
+                <input
+                  type="email"
+                  value={formData.from_email}
+                  onChange={e => setFormData({ ...formData, from_email: e.target.value })}
+                  placeholder="tua@email.com"
+                  className="w-full p-3 bg-black/50 border border-white/10 text-sm text-white placeholder-white/20 focus:outline-none focus:border-white/30"
+                />
+              </div>
 
-  <div>
-    <p className="text-[10px] uppercase tracking-widest text-white/30 mb-1">Oggetto</p>
-    <input
-      type="text"
-      value={formData.subject}
-      onChange={e => setFormData({...formData, subject: e.target.value})}
-      className="w-full p-3 bg-black/50 border border-white/10 text-sm text-white focus:outline-none focus:border-white/30"
-    />
-  </div>
+              <div>
+                <p className="text-[10px] uppercase tracking-widest text-white/30 mb-1">Oggetto</p>
+                <input
+                  type="text"
+                  value={formData.subject}
+                  onChange={e => setFormData({ ...formData, subject: e.target.value })}
+                  className="w-full p-3 bg-black/50 border border-white/10 text-sm text-white focus:outline-none focus:border-white/30"
+                />
+              </div>
 
-  <div>
-    <p className="text-[10px] uppercase tracking-widest text-white/30 mb-1">Messaggio</p>
-    <textarea
-      value={formData.message}
-      onChange={e => setFormData({...formData, message: e.target.value})}
-      rows={4}
-      className="w-full p-3 bg-black/50 border border-white/10 text-sm text-white focus:outline-none focus:border-white/30 resize-none"
-    />
-  </div>
+              <div>
+                <p className="text-[10px] uppercase tracking-widest text-white/30 mb-1">Messaggio</p>
+                <textarea
+                  value={formData.message}
+                  onChange={e => setFormData({ ...formData, message: e.target.value })}
+                  rows={4}
+                  className="w-full p-3 bg-black/50 border border-white/10 text-sm text-white focus:outline-none focus:border-white/30 resize-none"
+                />
+              </div>
 
-  <motion.button
-    onClick={sendEmail}
-    disabled={sending || !formData.from_email}
-    className="block w-full py-4 bg-white text-black text-center font-black uppercase tracking-wider text-sm hover:bg-pink-500 hover:text-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-    whileHover={{ scale: 1.02 }}
-    whileTap={{ scale: 0.98 }}
-  >
-    {sent ? '✓ Inviato!' : sending ? 'Invio...' : 'Invia Messaggio'}
-  </motion.button>
+              <motion.button
+                onClick={sendEmail}
+                disabled={sending || !formData.from_email}
+                className="block w-full py-4 bg-white text-black text-center font-black uppercase tracking-wider text-sm hover:bg-pink-500 hover:text-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                {sent ? '✓ Inviato!' : sending ? 'Invio...' : 'Invia Messaggio'}
+              </motion.button>
 
-  <p className="text-[9px] text-center text-white/20 uppercase tracking-tighter">
-    Il messaggio verrà inviato direttamente a noemi.cal21@gmail.com
-  </p>
-</div>
-            
+              <p className="text-[9px] text-center text-white/20 uppercase tracking-tighter">
+                Il messaggio verrà inviato direttamente a noemi.cal21@gmail.com
+              </p>
+            </div>
+
           </motion.div>
         )}
       </AnimatePresence>
